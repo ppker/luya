@@ -4,6 +4,8 @@ namespace luya\admin\models;
 
 use Yii;
 use luya\admin\ngrest\base\NgRestModel;
+use luya\admin\Module;
+use luya\admin\traits\SoftDeleteTrait;
 
 /**
  * Language Model for Frontend/Admin.
@@ -15,10 +17,13 @@ use luya\admin\ngrest\base\NgRestModel;
  * @property string $name
  * @property string $short_code
  * @property integer $is_default
+ * @property integer $is_deleted
  * @author Basil Suter <basil@nadar.io>
  */
-class Lang extends NgRestModel
+final class Lang extends NgRestModel
 {
+    use SoftDeleteTrait;
+    
     /**
      * @inheritdoc
      */
@@ -42,6 +47,13 @@ class Lang extends NgRestModel
                 self::updateAll(['is_default' => 0]);
             }
         });
+        
+        $this->on(self::EVENT_BEFORE_DELETE, function ($event) {
+            if ($this->is_default == 1) {
+                $this->addError('is_default', Module::t('model_lang_delete_error_is_default'));
+                $event->isValid = false;
+            }
+        });
     }
     
     /**
@@ -60,17 +72,8 @@ class Lang extends NgRestModel
         return [
             [['name', 'short_code'], 'required'],
             [['is_default'], 'integer'],
-        ];
-    }
-    
-    /**
-     * @inheritdoc
-     */
-    public function scenarios()
-    {
-        return [
-            'restcreate' => ['name', 'short_code', 'is_default'],
-            'restupdate' => ['name', 'short_code', 'is_default'],
+            [['name'], 'string', 'max' => 255],
+            [['short_code'], 'string', 'max' => 15],
         ];
     }
     
@@ -80,9 +83,9 @@ class Lang extends NgRestModel
     public function attributeLabels()
     {
         return [
-            'name' => 'Name',
-            'short_code' => 'Short Code',
-            'is_default' => 'Default Language',
+            'name' => Module::t('model_lang_name'),
+            'short_code' => Module::t('model_lang_short_code'),
+            'is_default' => Module::t('model_lang_is_default'),
         ];
     }
     
@@ -115,6 +118,8 @@ class Lang extends NgRestModel
      
         $config->options = ['saveCallback' => 'function(ServiceLanguagesData) { ServiceLanguagesData.load(true).then(function() { $scope.AdminLangService.load(); }); }'];
         
+        $config->delete = true;
+        
         return $config;
     }
     
@@ -141,7 +146,7 @@ class Lang extends NgRestModel
     public static function getDefault()
     {
         if (self::$_langInstance === null) {
-            self::$_langInstance = self::find()->where(['is_default' => 1])->asArray()->one();
+            self::$_langInstance = self::find()->where(['is_default' => 1, 'is_deleted' => 0])->asArray()->one();
         }
 
         return self::$_langInstance;
@@ -162,7 +167,7 @@ class Lang extends NgRestModel
             if (!$langShortCode) {
                 self::$_langInstanceFindActive = self::getDefault();
             } else {
-                self::$_langInstanceFindActive = self::find()->where(['short_code' => $langShortCode])->asArray()->one();
+                self::$_langInstanceFindActive = self::find()->where(['short_code' => $langShortCode, 'is_deleted' => 0])->asArray()->one();
             }
         }
         

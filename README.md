@@ -8,8 +8,8 @@ The [Yii 2 PHP Framework](https://github.com/yiisoft/yii2) wrapper which provide
 
 ![PHP7](https://img.shields.io/badge/php7-yes-green.svg)
 [![Build Status](https://travis-ci.org/luyadev/luya.svg?branch=master)](https://travis-ci.org/luyadev/luya)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/luyadev/luya/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/luyadev/luya/?branch=master)
 [![Coverage Status](https://coveralls.io/repos/github/luyadev/luya/badge.svg?branch=master)](https://coveralls.io/github/luyadev/luya?branch=master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/luyadev/luya/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/luyadev/luya/?branch=master)
 [![Total Downloads](https://poser.pugx.org/luyadev/luya-core/downloads)](https://packagist.org/packages/luyadev/luya-core)
 [![Join the chat at https://gitter.im/luyadev/luya](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/luyadev/luya)
 
@@ -52,7 +52,7 @@ We are always looking for people who share their thoughts, code and problems wit
 #### Unit Test
 
 1. Create Database (example luya_phpunit)
-2. Insert Database dump from `tests/data/sql/1.0.0-RC2.sql`
+2. Insert Database dump from `tests/data/sql/1.0.0.sql`
 3. Rename phpunit.xml.dist to phpunit.xml
 4. Change dsn, username and passwort in phpunit.xml
 5. Ensure you have installed current composer packages `composer install` with dev packages.

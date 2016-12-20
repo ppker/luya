@@ -14,6 +14,10 @@ The changelog contains informations about bug fixes, new features or bc breaking
 
 ### Added
 
+- [#1115](https://github.com/luyadev/luya/issues/1115) ActiveDataProvider default sorting configuration for news article overview.
+- [#1018](https://github.com/luyadev/luya/issues/1018) NgRest SelectModel Plugins where conditions, labelFields and labelTemplate properties added.
+- [#1010](https://github.com/luyadev/luya/issues/1010) Ability to soft delete admin languages if its not the system default language.
+- [#1110](https://github.com/luyadev/luya/issues/1110) Filemanager is sorting the directories alphabetically instead of chronologically.
 - [#1100](https://github.com/luyadev/luya/issues/1100) NgRestModel scenarios implements the restupdate and restcreate scenarios by default now.
 - [#1108](https://github.com/luyadev/luya/issues/1108) Added schema builder ability for migration files in order to support other shemes like postgreSQL.
 - [#1106](https://github.com/luyadev/luya/issues/1106) Added possibility to mock element arguments for the styleguide.
@@ -23,6 +27,9 @@ The changelog contains informations about bug fixes, new features or bc breaking
 
 ### Fixed
 
+- [#1101](https://github.com/luyadev/luya/issues/1101) Rest model validation did not use proper language for the yii translations based on the user language.
+- [#1111](https://github.com/luyadev/luya/issues/1111) Storage File selection does not display file name cause of not strict comparing method.
+- [#1099](https://github.com/luyadev/luya/issues/1099) Broken file list block translations fixed.
 - [#1097](https://github.com/luyadev/luya/issues/1097) Removed unused codes from the UrlManager parseRequest() method.
 
 1.0.0-RC2 (29. Nov 2016)

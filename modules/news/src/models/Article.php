@@ -76,17 +76,6 @@ class Article extends NgRestModel
             $this->timestamp_display_from = time();
         }
     }
-    
-    /**
-     * @inheritdoc
-     */
-    public function scenarios()
-    {
-        return [
-           'restcreate' => ['title', 'text', 'cat_id', 'image_id', 'image_list', 'timestamp_create', 'timestamp_display_from', 'timestamp_display_until', 'is_display_limit', 'file_list', 'teaser_text'],
-           'restupdate' => ['title', 'text', 'cat_id', 'image_id', 'image_list', 'timestamp_create', 'timestamp_display_from', 'timestamp_display_until', 'is_display_limit', 'file_list', 'teaser_text'],
-       ];
-    }
 
     /**
      * @inheritdoc
@@ -97,7 +86,7 @@ class Article extends NgRestModel
             [['title', 'text'], 'required'],
             [['title', 'text', 'image_list', 'file_list', 'teaser_text'], 'string'],
             [['cat_id', 'create_user_id', 'update_user_id', 'timestamp_create', 'timestamp_update', 'timestamp_display_from', 'timestamp_display_until', 'is_deleted', 'is_display_limit'], 'integer'],
-            [['image_id'], 'string', 'max' => 200],
+            [['image_id'], 'safe'],
         ];
     }
 
@@ -141,7 +130,7 @@ class Article extends NgRestModel
     }
 
     /**
-     * 
+     *
      * @return string
      */
     public function getDetailUrl()
@@ -184,7 +173,7 @@ class Article extends NgRestModel
     }
     
     /**
-     * 
+     *
      * @param string $limit
      * @return unknown
      */
@@ -209,7 +198,7 @@ class Article extends NgRestModel
     }
 
     /**
-     * 
+     *
      * @return \yii\db\ActiveQuery
      */
     public function getCat()
@@ -226,6 +215,4 @@ class Article extends NgRestModel
     {
         return $this->cat->title;
     }
-
-    
 }

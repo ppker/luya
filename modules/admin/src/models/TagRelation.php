@@ -6,18 +6,18 @@ use yii\db\ActiveRecord;
 
 /**
  * Tags in realtion to another Table.
- * 
+ *
  * In order to find all tags to a specific relation use:
- * 
+ *
  * ```php
  * $tags = TagRelation::getDataForRelation('my_table', '14');
  * ```
- * 
- * The above example will return all 
- * 
+ *
+ * The above example will return all
+ *
  * @author Basil Suter <basil@nadar.io>
  */
-class TagRelation extends ActiveRecord
+final class TagRelation extends ActiveRecord
 {
     /**
      * @inheritdoc
@@ -40,9 +40,9 @@ class TagRelation extends ActiveRecord
     
     /**
      * Get an array with all entries for a table name associated with a primary key.
-     * 
+     *
      * This methods i mainly used internal to retrieve data for the Active Window. Use the {{luya\admin\traits\TagsTrait}} in your Model instead.
-     * 
+     *
      * @param string $tableName The table name
      * @param integer $pkId The primary key combination.
      */
@@ -53,9 +53,9 @@ class TagRelation extends ActiveRecord
 
     /**
      * Get an array with all entries for a table name.
-     * 
+     *
      * This methods i mainly used internal to retrieve data for the Active Window. Use the {{luya\admin\traits\TagsTrait}} in your Model instead.
-     * 
+     *
      * @param string $tableName The table name.
      */
     public static function getDistinctDataForTable($tableName)
@@ -66,7 +66,7 @@ class TagRelation extends ActiveRecord
     /**
      * Get tag object relation.
      *
-     * @return \yii\db\ActiveQuery
+     * @return \luya\admin\models\Tag
      */
     public function getTag()
     {
